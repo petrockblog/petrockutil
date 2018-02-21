@@ -64,11 +64,12 @@ func GamepadBlock() cli.Command {
 				portPath := c.Args()[1]
 				// Set up options.
 				options := serial.OpenOptions{
-					PortName:        portPath,
-					BaudRate:        115200,
-					DataBits:        8,
-					StopBits:        1,
-					MinimumReadSize: 1,
+					PortName:              portPath,
+					BaudRate:              115200,
+					DataBits:              8,
+					StopBits:              1,
+					MinimumReadSize:       0,
+					InterCharacterTimeout: 1000,
 				}
 
 				// Open the port.
@@ -84,32 +85,15 @@ func GamepadBlock() cli.Command {
 				if err != nil {
 					log.Fatalf("port.Write: %v", err)
 				}
-				buf := []byte{}
+				buf := make([]byte, 16)
 				numBytes, err := port.Read(buf)
 				if err != nil {
-					panic("Could not read firmware version on port " + portPath)
+					fmt.Println("Could not read firmware version on port " + portPath)
+					return
 				}
 				versionString := buf[:numBytes]
 
-				fmt.Println("Read", numBytes, "bytes: ", versionString)
-
-				// var validVersionNum = regexp.MustCompile(`\s*([\d.]+)`)
-				// validVersionNum.FindString(versionString)
-				// if self.serialPort is not None:
-				//     ser = serial.Serial(self.serialPort, 115200, timeout=1)  # open serial port
-				//     print(ser.name)  # check which port was really used
-				//     ser.close()
-				//     ser.open()
-				//     ser.write("v".encode())
-				//     time.sleep(0.5)
-				//     read_val = ser.read(size=64)
-				//     ser.close()
-				//     versionString = read_val.decode("utf-8")
-				//     self.extractedVersion = re.search(r'\s*([\d.]+)', versionString)
-				// if self.extractedVersion is not None:
-				//     self.extractedVersion = self.extractedVersion.group(1)
-				//     print("Found version " + self.extractedVersion)
-				//     self.versionLabel['text'] = "INFO: Found GamepadBlock. The firmware version of it is  " + self.extractedVersion
+				fmt.Println("Found GamepadBlock at", portPath, ". The firmware version of it is", string(versionString))
 
 			case "prepare":
 				switch runtime.GOOS {
@@ -182,7 +166,7 @@ func GamepadBlock() cli.Command {
 						log.Fatal(err)
 						fmt.Println("An error occured during the firmware update process")
 					}
-					fmt.Println("Finished firmware update on port %s", port)
+					fmt.Println("Finished firmware update on port", port)
 
 				default:
 					fmt.Println("OS not yet supported.")
@@ -213,7 +197,7 @@ func downloadLatestFirmware() string {
 				fmt.Println("Most current firmware version is", currentVersion)
 				downloadURL := tempurl.Scheme + "://" + tempurl.Host + tempurl.Path
 				fmt.Println(downloadURL)
-				downloadURL = strings.Replace(downloadURL, "release/tag", "release/download", 1)
+				downloadURL = strings.Replace(downloadURL, "releases/tag", "releases/download", 1)
 				downloadURL += "/firmware.hex"
 				downloadedFile := downloadFromUrl(".", downloadURL)
 				if downloadedFile == "" {
