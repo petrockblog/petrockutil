@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	// "regexp"
 	"runtime"
 	"strings"
 
@@ -124,10 +123,10 @@ func GamepadBlock() cli.Command {
 
 					fmt.Println("Installing winavr...")
 					fmt.Printf("Initial value for $PATH: %s\n", os.Getenv("PATH"))
-					dirName, _ := createGortDirectory()
+					dirName, _ := createPetrockblockDirectory()
 					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
-					cmd := exec.Command(gortDirName() + "\\" + fileName)
+					cmd := exec.Command(petrockblockDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
@@ -164,7 +163,7 @@ func GamepadBlock() cli.Command {
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
 						log.Fatal(err)
-						fmt.Println("An error occured during the firmware update process")
+						fmt.Println("An error occurred during the firmware update process")
 					}
 					fmt.Println("Finished firmware update on port", port)
 

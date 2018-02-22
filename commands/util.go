@@ -71,27 +71,27 @@ func downloadFromUrl(dirName string, url string) string {
 	return fileName
 }
 
-func gortDirName() string {
+func petrockblockDirName() string {
 	usr, err := user.Current()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return usr.HomeDir + string(os.PathSeparator) + "gort"
+	return usr.HomeDir + string(os.PathSeparator) + "petrockblock"
 }
 
-func createGortDirectory() (string, error) {
-	dirName := gortDirName()
+func createPetrockblockDirectory() (string, error) {
+	dirName := petrockblockDirName()
 	fileExists, err := exists(dirName)
 	if fileExists {
-		fmt.Println("Gort lives")
+		fmt.Println("petrockblock lives")
 	} else {
 		os.Mkdir(dirName, 0777)
 	}
 	return dirName, err
 }
 
-func Unzip(src, dest string) error {
+func unzip(src, dest string) error {
 	r, err := zip.OpenReader(src)
 	if err != nil {
 		return err
@@ -126,17 +126,17 @@ func Unzip(src, dest string) error {
 	return nil
 }
 
-func supportDir(support string) (dir string, err error) {
-	usr, err := user.Current()
-	if err != nil {
-		return
-	}
-	dir = usr.HomeDir + "/.gort/support/" + support
-	_, err = os.Stat(dir)
-	if err != nil {
-		if os.IsNotExist(err) {
-			err = os.MkdirAll(dir, 0755)
-		}
-	}
-	return
-}
+// func supportDir(support string) (dir string, err error) {
+// 	usr, err := user.Current()
+// 	if err != nil {
+// 		return
+// 	}
+// 	dir = usr.HomeDir + "/.gort/support/" + support
+// 	_, err = os.Stat(dir)
+// 	if err != nil {
+// 		if os.IsNotExist(err) {
+// 			err = os.MkdirAll(dir, 0755)
+// 		}
+// 	}
+// 	return
+// }
