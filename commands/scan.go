@@ -26,7 +26,7 @@ func Scan() cli.Command {
 			}
 
 			usage := func() {
-				fmt.Println("Usage: gort scan <serial|usb|bluetooth|ble>")
+				fmt.Println("Usage: petrockutil scan <serial|usb|bluetooth|ble>")
 			}
 
 			if valid == false {
@@ -159,7 +159,7 @@ func osxBLEScan() {
 
 func downloadOSXBLEScanner() {
 	dirName, _ := createPetrockblockDirectory()
-	zipFile := "https://s3.amazonaws.com/gort-io/support/osx/blescanner.zip"
+	zipFile := "https://downloads.petrockblock.com/petrockutil/blescanner.zip"
 	fileName := downloadFromUrl(dirName, zipFile)
 	unzipOSXScannerInstaller(dirName, dirName+"/"+fileName)
 

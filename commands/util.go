@@ -125,18 +125,3 @@ func unzip(src, dest string) error {
 
 	return nil
 }
-
-// func supportDir(support string) (dir string, err error) {
-// 	usr, err := user.Current()
-// 	if err != nil {
-// 		return
-// 	}
-// 	dir = usr.HomeDir + "/.gort/support/" + support
-// 	_, err = os.Stat(dir)
-// 	if err != nil {
-// 		if os.IsNotExist(err) {
-// 			err = os.MkdirAll(dir, 0755)
-// 		}
-// 	}
-// 	return
-// }

@@ -20,7 +20,7 @@ import (
 func GamepadBlock() cli.Command {
 	return cli.Command{
 		Name:  "gamepadblock",
-		Usage: "Install avrdude, and update firmware of your GamepadBlock",
+		Usage: "Installs avrdude, read firmware version, and update firmware of your GamepadBlock",
 		Action: func(c *cli.Context) {
 			valid := false
 			for _, s := range []string{"readversion", "prepare", "update"} {
@@ -124,7 +124,7 @@ func GamepadBlock() cli.Command {
 					fmt.Println("Installing winavr...")
 					fmt.Printf("Initial value for $PATH: %s\n", os.Getenv("PATH"))
 					dirName, _ := createPetrockblockDirectory()
-					exeFile := "https://s3.amazonaws.com/gort-io/support/WinAVR-20100110-install.exe"
+					exeFile := "https://downloads.petrockblock.com/petrockutil/WinAVR-20100110-install.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
 					cmd := exec.Command(petrockblockDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
