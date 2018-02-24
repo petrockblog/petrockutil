@@ -9,7 +9,7 @@ GOARCH_1 = amd64
 GOARCH_2 = 386
 GOARCH_3 = arm
 
-VERSION?=?
+VERSION=$(shell sed -n 4p version.go | cut -d' ' -f4)
 COMMIT=$(shell git rev-parse HEAD)
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
