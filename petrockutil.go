@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/codegangsta/cli"
-	"petrockutil/commands"
+	"github.com/petrockblog/petrockutil/commands"
 )
 
 func main() {
