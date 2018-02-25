@@ -123,14 +123,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "petrockutil.go",
-			"settings":
-			{
-				"buffer_size": 324,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -235,10 +227,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 89.0,
-		"last_filter": "9o",
+		"height": 389.0,
+		"last_filter": "link",
 		"selected_items":
 		[
+			[
+				"link",
+				"MarkdownEditing: New Inline Link"
+			],
 			[
 				"9o",
 				"GoSublime: Activate 9o"
@@ -504,7 +500,7 @@
 				"Package Control: Remove Package"
 			]
 		],
-		"width": 428.0
+		"width": 508.0
 	},
 	"console":
 	{
@@ -525,8 +521,17 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil"
+	],
 	"file_history":
 	[
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil/CHANGELOG.md",
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil/README.md",
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil/Makefile",
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil/petrockutil.go",
+		"/Users/florian/Programming/go/src/github.com/petrockblog/petrockutil/deployArchives.sh",
 		"/Users/florian/Programming/go/petrockutil/src/commands/util.go",
 		"/Users/florian/.zshrc",
 		"/Users/florian/Programming/go/petrockutil/src/petrockutil.sublime-project",
@@ -649,16 +654,11 @@
 		"/Users/florian/Downloads/N64_Arduino/N64_Arduino.pde",
 		"/Users/florian/Programming/Github/GamepadBlock/downloadFirmware",
 		"/Users/florian/Programming/Github/GamepadBlock/downloadFirmwareViaBTL.sh",
-		"/Users/florian/Programming/Github/GamepadBlock/VirtualSerial/VirtualSerial.h",
-		"/Users/florian/Programming/Github/GamepadBlock/VirtualSerial/makefile",
-		"/Users/florian/Programming/Github/GamepadBlock/VirtualSerial/VirtualSerial.c",
-		"/Users/florian/Programming/Github/GamepadBlock/src/makefile",
-		"/Users/florian/Programming/Github/GamepadBlock/makefile",
-		"/Users/florian/Programming/Github/GamepadBlock/VirtualSerial/Config/LUFAConfig.h"
+		"/Users/florian/Programming/Github/GamepadBlock/VirtualSerial/VirtualSerial.h"
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -672,6 +672,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"VERSION",
+			"version",
+			"VERSION",
+			"GOARCH_2",
+			"darwin",
+			"linux",
+			"GOARCH"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -689,43 +696,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "petrockutil.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_thread_running": true,
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -897,7 +869,7 @@
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 256.0,
 	"status_bar_visible": true,
 	"template_settings":

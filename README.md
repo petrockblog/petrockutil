@@ -15,7 +15,7 @@ A typical series of steps would be to first
 1. scan for serial ports, `petrockutil scan serial`, then
 2. read the firmware version, `petrockutil gamepadblock readversion <port>`, and then
 3. if you do not have AVRDude installed, install it, `petrockutil gamepadblock prepare`,
-3. update the firmware, `petrockutil gamepadblock update <port>`,
+3. update the firmware, `petrockutil gamepadblock update <port>`.
 
 
 # Download

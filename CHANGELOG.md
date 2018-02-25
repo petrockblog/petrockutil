@@ -1,5 +1,10 @@
 # Release History
 
+## Version 1.0.1
+
+- Switched from WinAVR to MHV AVR Tools to add support for ATmega32U2 controllers in AVRDude
+- Added more console output to enhance usability
+
 ## Version 1.0.0
 
  - Initial release

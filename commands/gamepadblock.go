@@ -40,7 +40,8 @@ func GamepadBlock() cli.Command {
 				fmt.Println("  # Reads the version number of the current firmware on the GamepadBlock at given port")
 				fmt.Println()
 				fmt.Println("  petrockutil gamepadblock prepare")
-				fmt.Println("  # Installs avrdude to allow uploading of firmware .hex files to GamepadBlock")
+				fmt.Println("  # Installs avrdude to allow uploading of firmware .hex files to GamepadBlock.")
+				fmt.Println("  # Console needs to be run as administrator.")
 				fmt.Println()
 				fmt.Println("  petrockutil gamepadblock update <port>")
 				fmt.Println("  # Updates firmware of GamepadBlock at provided port to most recent version")
@@ -111,6 +112,7 @@ func GamepadBlock() cli.Command {
 					cmd.Stdout = os.Stdout
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
+						fmt.Println("Something went wrong. Is brew (https://brew.sh) installed?")
 						log.Fatal(err)
 					}
 
@@ -121,10 +123,10 @@ func GamepadBlock() cli.Command {
 						os.Exit(1)
 					}
 
-					fmt.Println("Installing winavr...")
+					fmt.Println("Installing AVR Tools ...")
 					fmt.Printf("Initial value for $PATH: %s\n", os.Getenv("PATH"))
 					dirName, _ := createPetrockblockDirectory()
-					exeFile := "https://downloads.petrockblock.com/petrockutil/WinAVR-20100110-install.exe"
+					exeFile := "https://downloads.petrockblock.com/petrockutil/MHV_AVR_Tools_20131101.exe"
 					fileName := downloadFromUrl(dirName, exeFile)
 					cmd := exec.Command(petrockblockDirName() + "\\" + fileName)
 					cmd.Stdout = os.Stdout
@@ -132,12 +134,13 @@ func GamepadBlock() cli.Command {
 					if err := cmd.Run(); err != nil {
 						log.Fatal(err)
 					}
+					fmt.Println("Installation successful. Please restart the console.")
 
 				default:
 					fmt.Println("OS not yet supported.")
 				}
 			case "update":
-				if len(c.Args()) < 1 {
+				if len(c.Args()) < 2 {
 					fmt.Println("Invalid number of arguments.")
 					usage()
 					return
@@ -150,6 +153,7 @@ func GamepadBlock() cli.Command {
 
 				fmt.Println("Downloading the latest firmware")
 				filename := downloadLatestFirmware()
+				defer os.Remove(filename)
 				fmt.Println("Downloaded firmware file", filename)
 
 				fmt.Println("Press the RESET button on the GameapadBlock to activate its update mode.")
@@ -165,6 +169,7 @@ func GamepadBlock() cli.Command {
 						log.Fatal(err)
 						fmt.Println("An error occurred during the firmware update process")
 					}
+
 					fmt.Println("Finished firmware update on port", port)
 
 				default:
