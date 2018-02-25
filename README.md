@@ -17,6 +17,10 @@ A typical series of steps would be to first
 3. if you do not have AVRDude installed, install it, `petrockutil gamepadblock prepare`,
 3. update the firmware, `petrockutil gamepadblock update <port>`.
 
+Here is a screencast that shows the usage of the tool:
+
+[![asciicast](https://asciinema.org/a/xnRUEwLBzexW3MNY21zXSFNak.png)](https://asciinema.org/a/xnRUEwLBzexW3MNY21zXSFNak)
+
 
 # Download
 
