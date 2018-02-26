@@ -159,6 +159,8 @@ func GamepadBlock() cli.Command {
 				fmt.Println("Press the RESET button on the GameapadBlock to activate its update mode.")
 				fmt.Print("Press 'Enter' to continue...")
 				bufio.NewReader(os.Stdin).ReadBytes('\n')
+				duration := time.Duration(3) * time.Second
+				time.Sleep(duration)
 
 				switch runtime.GOOS {
 				case "darwin", "linux", "windows":
@@ -167,7 +169,7 @@ func GamepadBlock() cli.Command {
 					cmd.Stderr = os.Stderr
 					if err := cmd.Run(); err != nil {
 						log.Fatal(err)
-						fmt.Println("An error occurred during the firmware update process")
+						fmt.Println("An error occurred during the firmware update process. Is the port correct?")
 					}
 
 					fmt.Println("Finished firmware update on port", port)
