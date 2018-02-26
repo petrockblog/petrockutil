@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/codegangsta/cli"
 	"github.com/jacobsa/go-serial/serial"
