@@ -24,7 +24,7 @@ func GamepadBlock() cli.Command {
 		Usage: "Installs avrdude, read firmware version, and update firmware of your GamepadBlock",
 		Action: func(c *cli.Context) {
 			valid := false
-			for _, s := range []string{"readversion", "prepare", "update"} {
+			for _, s := range []string{"readversion", "prepare", "update", "memdump"} {
 				if s == c.Args().First() {
 					valid = true
 				}
@@ -46,6 +46,9 @@ func GamepadBlock() cli.Command {
 				fmt.Println()
 				fmt.Println("  petrockutil gamepadblock update <port>")
 				fmt.Println("  # Updates firmware of GamepadBlock at provided port to most recent version")
+				fmt.Println()
+				fmt.Println("  petrockutil gamepadblock memdump <port>")
+				fmt.Println("  # Dumps the firmware of the GamepadBlock into the local file gamepadblock_memdump.bin")
 				fmt.Println()
 			}
 
@@ -174,6 +177,36 @@ func GamepadBlock() cli.Command {
 					}
 
 					fmt.Println("Finished firmware update on port", port)
+
+				default:
+					fmt.Println("OS not yet supported.")
+				}
+			case "memdump":
+				if len(c.Args()) < 2 {
+					fmt.Println("Invalid number of arguments.")
+					usage()
+					return
+				}
+				port := c.Args()[1]
+
+				fmt.Println("Press the RESET button on the GameapadBlock to activate its memory dump mode.")
+				fmt.Print("Press 'Enter' to continue...")
+				bufio.NewReader(os.Stdin).ReadBytes('\n')
+				duration := time.Duration(3) * time.Second
+				time.Sleep(duration)
+				filename := "gamepadblock_memdump.bin"
+
+				switch runtime.GOOS {
+				case "darwin", "linux", "windows":
+					cmd := exec.Command("avrdude", "-pm32u2", "-cavr109", fmt.Sprintf("-P%v", port), "-D", fmt.Sprintf("-Uflash:r:%v:r", filename))
+					cmd.Stdout = os.Stdout
+					cmd.Stderr = os.Stderr
+					if err := cmd.Run(); err != nil {
+						log.Fatal(err)
+						fmt.Println("An error occurred during the firmware update process. Is the port correct?")
+					}
+
+					fmt.Println("Finished memory dump on port", port, "to file", filename)
 
 				default:
 					fmt.Println("OS not yet supported.")
